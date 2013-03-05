@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <configuration>
+        <stop-on-errors>true</stop-on-errors>
+        <date-format>MM/dd/yyyy HH:mm</date-format>
+        <wildcard>true</wildcard>
+    </configuration>
+
+    <mapping>
+        <class-a>com.dss.immutability.Foo</class-a>
+        <class-b>com.dss.immutability.ImmutableFoo$Builder</class-b>
+
+        <field>
+            <a set-method="setBar">bar</a>
+            <b set-method="bar">bar</b>
+        </field>
+
+        <field>
+            <a set-method="setBaz">baz</a>
+            <b set-method="baz">baz</b>
+        </field>
+    </mapping>
+
+</mappings>
