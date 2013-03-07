@@ -17,15 +17,15 @@ class PersonBuilder extends BuilderSupport {
         personExpando = new Expando()
 
         personExpando.build = {
-            return new Person(personExpando.firstName,
-                    personExpando.lastName,
+            new Person(personExpando.firstName,
+                personExpando.lastName,
                     new Address(addressExpando.streetNumber,
-                            addressExpando.street,
-                            addressExpando.city,
-                            addressExpando.state,
-                            addressExpando.zip,
-                            homePhone,
-                            mobilePhone))
+                        addressExpando.street,
+                        addressExpando.city,
+                        addressExpando.state,
+                        addressExpando.zip,
+                        homePhone,
+                        mobilePhone))
         }
     }
 
@@ -39,7 +39,7 @@ class PersonBuilder extends BuilderSupport {
         } else if ("person" == name) {
             fillExpandoProperties(personExpando, attributes)
         } else {
-            return new UnsupportedOperationException("${name} is not a supported builder node type!")
+            throw new UnsupportedOperationException("${name} is not a supported builder node type!")
         }
     }
 

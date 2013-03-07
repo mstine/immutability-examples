@@ -10,16 +10,17 @@ class PersonBuilderSpec extends Specification {
 
         when:
 
-        def person = personBuilder.person(firstName: "John", lastName: "Doe") {
-                                    address(streetNumber: "123",
-                                            street: "Anywhere St.",
-                                            city: "Anytown",
-                                            state: "USA",
-                                            zip: "12345") {
-                                                homePhone(areaCode: "123", prefix: "456", lineNumber: "7890")
-                                                mobilePhone(areaCode: "234", prefix: "567", lineNumber: "8901")
-                                            }
-                                    }.build()
+        def person = personBuilder
+            .person(firstName: "John", lastName: "Doe") {
+                address(streetNumber: "123",
+                    street: "Anywhere St.",
+                    city: "Anytown",
+                    state: "USA",
+                    zip: "12345") {
+                        homePhone(areaCode: "123", prefix: "456", lineNumber: "7890")
+                        mobilePhone(areaCode: "234", prefix: "567", lineNumber: "8901")
+                    }
+            }.build()
 
         then:
 
