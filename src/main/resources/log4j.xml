@@ -10,7 +10,7 @@
             <param name="ConversionPattern" value="%-5p: %c - %m%n" />
         </layout>
     </appender>
-
+x
     <logger name="org.dozer">
         <level value="info" />
     </logger>
