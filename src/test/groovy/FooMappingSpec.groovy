@@ -28,8 +28,8 @@ class FooMappingSpec extends Specification {
 
         def mapper = new DozerBeanMapper(["mapping.xml"])
         def iFoo = new ImmutableFoo.Builder()
-                .bar("bar")
-                .baz("baz")
+                .withBar("bar")
+                .withBaz("baz")
                 .build()
 
         when:

@@ -16,12 +16,12 @@
 
         <field>
             <a set-method="setBar">bar</a>
-            <b set-method="bar">bar</b>
+            <b set-method="withBar">bar</b>
         </field>
 
         <field>
             <a set-method="setBaz">baz</a>
-            <b set-method="baz">baz</b>
+            <b set-method="withBaz">baz</b>
         </field>
     </mapping>
 

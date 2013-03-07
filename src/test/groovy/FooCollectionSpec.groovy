@@ -11,10 +11,10 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def seq = sequence(new ImmutableFoo.Builder().bar("1").baz("A").build(),
-                new ImmutableFoo.Builder().bar("2").baz("B").build(),
-                new ImmutableFoo.Builder().bar("1").baz("Z").build(),
-                new ImmutableFoo.Builder().bar("1").baz("B").build())
+        def seq = sequence(new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
+                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("B").build())
 
         when:
 
@@ -35,10 +35,10 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def seq = sequence(new ImmutableFoo.Builder().bar("1").baz("A").build(),
-                new ImmutableFoo.Builder().bar("2").baz("B").build(),
-                new ImmutableFoo.Builder().bar("1").baz("Z").build(),
-                new ImmutableFoo.Builder().bar("1").baz("B").build())
+        def seq = sequence(new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
+                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("B").build())
 
         when:
 
@@ -59,11 +59,11 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def p1List = TreeList.treeList(new ImmutableFoo.Builder().bar("1").baz("A").build())
+        def p1List = TreeList.treeList(new ImmutableFoo.Builder().withBar("1").withBaz("A").build())
 
         when:
 
-        def p2List = p1List.cons(new ImmutableFoo.Builder().bar("2").baz("B").build())
+        def p2List = p1List.cons(new ImmutableFoo.Builder().withBar("2").withBaz("B").build())
 
         then:
 

@@ -4,4 +4,8 @@ out
 *.ipr
 *.iml
 *.iws
+.classpath
+.project
+.settings
+bin
 
