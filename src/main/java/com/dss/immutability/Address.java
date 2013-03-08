@@ -47,4 +47,34 @@ public class Address {
     public PhoneNumber getMobilePhone() {
         return mobilePhone;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Address address = (Address) o;
+
+        if (!city.equals(address.city)) return false;
+        if (!homePhone.equals(address.homePhone)) return false;
+        if (!mobilePhone.equals(address.mobilePhone)) return false;
+        if (!state.equals(address.state)) return false;
+        if (!street.equals(address.street)) return false;
+        if (!streetNumber.equals(address.streetNumber)) return false;
+        if (!zip.equals(address.zip)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = streetNumber.hashCode();
+        result = 31 * result + street.hashCode();
+        result = 31 * result + city.hashCode();
+        result = 31 * result + state.hashCode();
+        result = 31 * result + zip.hashCode();
+        result = 31 * result + homePhone.hashCode();
+        result = 31 * result + mobilePhone.hashCode();
+        return result;
+    }
 }

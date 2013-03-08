@@ -23,4 +23,26 @@ public final class Person {
     public Address getAddress() {
         return address;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (!address.equals(person.address)) return false;
+        if (!firstName.equals(person.firstName)) return false;
+        if (!lastName.equals(person.lastName)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + address.hashCode();
+        return result;
+    }
 }

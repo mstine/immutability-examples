@@ -21,4 +21,23 @@ public class Foo {
         this.baz = baz;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Foo foo = (Foo) o;
+
+        if (!bar.equals(foo.bar)) return false;
+        if (!baz.equals(foo.baz)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = bar.hashCode();
+        result = 31 * result + baz.hashCode();
+        return result;
+    }
 }

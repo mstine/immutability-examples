@@ -1,11 +1,11 @@
 package com.dss.immutability
 
-import com.dss.immutability.ImmutableFoo
+import com.googlecode.totallylazy.Callable2
 import com.googlecode.totallylazy.Predicate
-import com.googlecode.totallylazy.collections.TreeList
 import spock.lang.Specification
 
-import static com.googlecode.totallylazy.Sequences.sequence;
+import static com.googlecode.totallylazy.Sequences.sequence
+import static com.googlecode.totallylazy.collections.TreeList.treeList
 
 class FooCollectionSpec extends Specification {
 
@@ -29,6 +29,7 @@ class FooCollectionSpec extends Specification {
 
         then:
 
+        seq.size() == 4
         filtered.size() == 3
 
     }
@@ -53,6 +54,7 @@ class FooCollectionSpec extends Specification {
 
         then:
 
+        seq.size() == 4
         filtered.size() == 2
 
     }
@@ -61,7 +63,7 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def p1List = TreeList.treeList(new ImmutableFoo.Builder().withBar("1").withBaz("A").build())
+        def p1List = treeList(new ImmutableFoo.Builder().withBar("1").withBaz("A").build())
 
         when:
 
@@ -71,5 +73,71 @@ class FooCollectionSpec extends Specification {
 
         p1List.size() == 1
         p2List.size() == 2
+    }
+
+    def "filter a TreeList"() {
+        given:
+
+        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
+                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def pList = treeList(list)
+
+        when:
+
+        def filtered = pList.filter(new Predicate<ImmutableFoo>() {
+            @Override
+            boolean matches(ImmutableFoo other) {
+                return other.baz == "Z" || other.baz == "A"
+            }
+        })
+
+        then:
+
+        pList.size() == 4
+        filtered.size() == 2
+    }
+
+    def "from regular list"() {
+        given:
+
+        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
+                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+
+        when:
+
+        def pList = treeList(list)
+
+        then:
+
+        pList.size() == 4
+        pList.head().bar == "1"
+        pList.tail().head().baz == "B"
+    }
+
+    def "sum of the foobars"() {
+        given:
+
+        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
+                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
+                new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def pList = treeList(list)
+
+        when:
+
+        def sum = pList.fold(0, new Callable2<Integer, ImmutableFoo, Integer>() {
+            @Override
+            Integer call(Integer a, ImmutableFoo b) throws Exception {
+                return a + Integer.parseInt(b.bar)
+            }
+        })
+
+        then:
+
+        sum == 5
     }
 }

@@ -23,4 +23,26 @@ public class PhoneNumber {
     public String getLineNumber() {
         return lineNumber;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PhoneNumber that = (PhoneNumber) o;
+
+        if (!areaCode.equals(that.areaCode)) return false;
+        if (!lineNumber.equals(that.lineNumber)) return false;
+        if (!prefix.equals(that.prefix)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = areaCode.hashCode();
+        result = 31 * result + prefix.hashCode();
+        result = 31 * result + lineNumber.hashCode();
+        return result;
+    }
 }
