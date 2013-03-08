@@ -22,6 +22,11 @@ dependencies {
   compile "co.jirm:jirm-spring:0.0.5"
 
   testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+  testCompile "org.springframework:spring-test:3.2.0.RELEASE"
+
+  testRuntime "org.spockframework:spock-spring:0.7-groovy-2.0"
+
+  runtime 'postgresql:postgresql:9.1-901.jdbc4'
 }
 
 

@@ -1,3 +1,5 @@
+package com.dss.immutability
+
 import com.dss.immutability.Foo
 import com.dss.immutability.ImmutableFoo
 import org.dozer.DozerBeanMapper

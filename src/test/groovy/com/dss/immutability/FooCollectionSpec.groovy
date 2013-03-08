@@ -1,3 +1,5 @@
+package com.dss.immutability
+
 import com.dss.immutability.ImmutableFoo
 import com.googlecode.totallylazy.Predicate
 import com.googlecode.totallylazy.collections.TreeList

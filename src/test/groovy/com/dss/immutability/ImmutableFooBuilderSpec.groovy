@@ -1,3 +1,5 @@
+package com.dss.immutability
+
 import com.dss.immutability.ImmutableFoo
 import spock.lang.Specification
 
