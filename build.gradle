@@ -19,7 +19,11 @@ dependencies {
   compile "net.sf.dozer:dozer:5.4.0"
   compile "com.google.guava:guava:12.0"
   compile "com.googlecode.totallylazy:totallylazy:1044"
-  compile "co.jirm:jirm-spring:0.0.5"
+  compile "org.springframework:spring-context:3.2.0.RELEASE"
+  compile "org.springframework:spring-jdbc:3.2.0.RELEASE"
+    compile "co.jirm:jirm-spring:0.0.5", {
+      exclude group: 'org.springframework'
+  }
 
   testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
   testCompile "org.springframework:spring-test:3.2.0.RELEASE"

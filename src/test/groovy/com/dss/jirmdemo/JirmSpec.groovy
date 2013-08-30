@@ -4,11 +4,12 @@ import co.jirm.orm.JirmFactory
 import com.dss.jirmdemo.model.Speaker
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.AnnotationConfigContextLoader
 import org.springframework.test.context.transaction.TransactionConfiguration
 import org.springframework.transaction.annotation.Transactional
 import spock.lang.Specification
 
-@ContextConfiguration(["classpath:application-context.xml"])
+@ContextConfiguration(loader=AnnotationConfigContextLoader.class,classes=AppConfig.class)
 @TransactionConfiguration(transactionManager="transactionManager")
 @Transactional
 class JirmSpec extends Specification {
