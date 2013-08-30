@@ -1,17 +1,21 @@
 package com.dss.immutability
 
-import com.dss.immutability.Foo
-import com.dss.immutability.ImmutableFoo
 import org.dozer.DozerBeanMapper
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.AnnotationConfigContextLoader
 import spock.lang.Specification
 
+@ContextConfiguration(loader=AnnotationConfigContextLoader.class,classes=DozerConfig.class)
 class FooMappingSpec extends Specification {
+
+    @Autowired
+    DozerBeanMapper mapper;
 
     def "can map Foo to ImmutableFoo"() {
 
         given:
 
-        def mapper = new DozerBeanMapper(["mapping.xml"])
         def foo = new Foo(bar: "bar", baz: "baz")
 
         when:
@@ -28,7 +32,6 @@ class FooMappingSpec extends Specification {
 
         given:
 
-        def mapper = new DozerBeanMapper(["mapping.xml"])
         def iFoo = new ImmutableFoo.Builder()
                 .withBar("bar")
                 .withBaz("baz")

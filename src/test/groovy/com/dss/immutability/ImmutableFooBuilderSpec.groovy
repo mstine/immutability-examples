@@ -1,6 +1,5 @@
 package com.dss.immutability
 
-import com.dss.immutability.ImmutableFoo
 import spock.lang.Specification
 
 class ImmutableFooBuilderSpec extends Specification {

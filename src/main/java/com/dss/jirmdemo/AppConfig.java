@@ -35,4 +35,5 @@ public class AppConfig {
     public SpringJirmFactory jirmFactory() {
         return new SpringJirmFactory(dataSource());
     }
+
 }
