@@ -1,41 +1,36 @@
 package com.dss.immutability
 
-import com.dss.immutability.Address
-import com.dss.immutability.Person
-import com.dss.immutability.PhoneNumber
-
 class PersonBuilder extends BuilderSupport {
 
-    // Root and inner nodes
     def personExpando
     def addressExpando
-
-    // Leaf nodes
-    def homePhone
-    def mobilePhone
+    def homePhoneExpando
+    def mobilePhoneExpando
 
     PersonBuilder() {
         addressExpando = new Expando()
         personExpando = new Expando()
+        homePhoneExpando = new Expando()
+        mobilePhoneExpando = new Expando()
 
         personExpando.build = {
             new Person(personExpando.firstName,
-                personExpando.lastName,
+                    personExpando.lastName,
                     new Address(addressExpando.streetNumber,
-                        addressExpando.street,
-                        addressExpando.city,
-                        addressExpando.state,
-                        addressExpando.zip,
-                        homePhone,
-                        mobilePhone))
+                            addressExpando.street,
+                            addressExpando.city,
+                            addressExpando.state,
+                            addressExpando.zip,
+                            new PhoneNumber(homePhoneExpando.areaCode, homePhoneExpando.prefix, homePhoneExpando.lineNumber),
+                            new PhoneNumber(mobilePhoneExpando.areaCode, mobilePhoneExpando.prefix, mobilePhoneExpando.lineNumber)))
         }
     }
 
     def createNode(Object name, Map attributes) {
         if ("homePhone" == name) {
-            homePhone = buildPhoneNumber(attributes)
+            fillExpandoProperties(homePhoneExpando, attributes)
         } else if ("mobilePhone" == name) {
-            mobilePhone = buildPhoneNumber(attributes)
+            fillExpandoProperties(mobilePhoneExpando, attributes)
         } else if ("address" == name) {
             fillExpandoProperties(addressExpando, attributes)
         } else if ("person" == name) {
@@ -50,10 +45,6 @@ class PersonBuilder extends BuilderSupport {
             expando."${key}" = value
         }
         expando
-    }
-
-    private def buildPhoneNumber(Map attributes) {
-        new PhoneNumber(attributes.areaCode, attributes.prefix, attributes.lineNumber)
     }
 
     void setParent(Object parent, Object child) {

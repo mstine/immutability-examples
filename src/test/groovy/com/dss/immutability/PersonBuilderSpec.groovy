@@ -29,6 +29,6 @@ class PersonBuilderSpec extends Specification {
         person.firstName == "John"
         person.address.city == "Anytown"
         person.address.mobilePhone.prefix == "567"
-
+        person.address.homePhone.lineNumber == "7890"
     }
 }
