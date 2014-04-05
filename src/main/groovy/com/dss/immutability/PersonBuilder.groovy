@@ -5,21 +5,21 @@ class PersonBuilder extends BuilderSupport {
     def expandos
 
     PersonBuilder() {
-        expandos = ["person": new Expando(),
-                    "address": new Expando(),
-                    "homePhone": new Expando(),
-                    "mobilePhone": new Expando()]
+        expandos = [person: new Expando(),
+                    address: new Expando(),
+                    homePhone: new Expando(),
+                    mobilePhone: new Expando()]
 
-        expandos["person"].build = {
-            new Person(expandos["person"].firstName,
-                    expandos["person"].lastName,
-                    new Address(expandos["address"].streetNumber,
-                            expandos["address"].street,
-                            expandos["address"].city,
-                            expandos["address"].state,
-                            expandos["address"].zip,
-                            buildPhoneNumber(expandos["homePhone"]),
-                            buildPhoneNumber(expandos["mobilePhone"])))
+        expandos.person.build = {
+            new Person(expandos.person.firstName,
+                    expandos.person.lastName,
+                    new Address(expandos.address.streetNumber,
+                            expandos.address.street,
+                            expandos.address.city,
+                            expandos.address.state,
+                            expandos.address.zip,
+                            buildPhoneNumber(expandos.homePhone),
+                            buildPhoneNumber(expandos.mobilePhone)))
         }
     }
 
