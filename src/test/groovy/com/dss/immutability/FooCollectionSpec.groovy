@@ -1,5 +1,6 @@
 package com.dss.immutability
 
+import com.googlecode.totallylazy.Callable1
 import com.googlecode.totallylazy.Callable2
 import com.googlecode.totallylazy.Predicate
 import spock.lang.Specification
@@ -139,5 +140,29 @@ class FooCollectionSpec extends Specification {
         then:
 
         sum == 5
+    }
+
+    def "lowercase the foobazs"() {
+        given:
+
+        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
+                    new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
+                    new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
+                    new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def pList = treeList(list)
+
+        when:
+
+        def lowerList = pList.map(new Callable1<ImmutableFoo, ImmutableFoo>() {
+            @Override
+            ImmutableFoo call(ImmutableFoo o) throws Exception {
+                return new ImmutableFoo.Builder().withBar(o.bar).withBaz(o.baz.toLowerCase()).build()
+            }
+        })
+
+        then:
+
+        lowerList.head().baz == 'a'
+        lowerList.tail().head().baz == 'b'
     }
 }
