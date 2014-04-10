@@ -14,16 +14,16 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def seq = sequence(new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
-                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("B").build())
+        def seq = sequence(new Foo(bar: "1", baz: "A"),
+                new Foo(bar: "2", baz: "B"),
+                new Foo(bar: "1", baz: "Z"),
+                new Foo(bar: "1", baz: "B"))
 
         when:
 
-        def filtered = seq.filter(new Predicate<ImmutableFoo>() {
+        def filtered = seq.filter(new Predicate<Foo>() {
             @Override
-            boolean matches(ImmutableFoo other) {
+            boolean matches(Foo other) {
                 return other.bar == "1"
             }
         })
@@ -39,16 +39,16 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def seq = sequence(new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
-                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("B").build())
+        def seq = sequence(new Foo(bar: "1", baz: "A"),
+                new Foo(bar: "2", baz: "B"),
+                new Foo(bar: "1", baz: "Z"),
+                new Foo(bar: "1", baz: "B"))
 
         when:
 
-        def filtered = seq.filter(new Predicate<ImmutableFoo>() {
+        def filtered = seq.filter(new Predicate<Foo>() {
             @Override
-            boolean matches(ImmutableFoo other) {
+            boolean matches(Foo other) {
                 return other.baz == "Z" || other.baz == "A"
             }
         })
@@ -64,11 +64,11 @@ class FooCollectionSpec extends Specification {
 
         given:
 
-        def p1List = treeList(new ImmutableFoo.Builder().withBar("1").withBaz("A").build())
+        def p1List = treeList(new Foo(bar: "1", baz: "A"))
 
         when:
 
-        def p2List = p1List.cons(new ImmutableFoo.Builder().withBar("2").withBaz("B").build())
+        def p2List = p1List.cons(new Foo(bar: "2", baz: "B"))
 
         then:
 
@@ -79,17 +79,17 @@ class FooCollectionSpec extends Specification {
     def "filter a TreeList"() {
         given:
 
-        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
-                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def list = [new Foo(bar: "1", baz: "A"),
+                    new Foo(bar: "2", baz: "B"),
+                    new Foo(bar: "1", baz: "Z"),
+                    new Foo(bar: "1", baz: "B")]
         def pList = treeList(list)
 
         when:
 
-        def filtered = pList.filter(new Predicate<ImmutableFoo>() {
+        def filtered = pList.filter(new Predicate<Foo>() {
             @Override
-            boolean matches(ImmutableFoo other) {
+            boolean matches(Foo other) {
                 return other.baz == "Z" || other.baz == "A"
             }
         })
@@ -103,10 +103,10 @@ class FooCollectionSpec extends Specification {
     def "from regular list"() {
         given:
 
-        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
-                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def list = [new Foo(bar: "1", baz: "A"),
+                    new Foo(bar: "2", baz: "B"),
+                    new Foo(bar: "1", baz: "Z"),
+                    new Foo(bar: "1", baz: "B")]
 
         when:
 
@@ -122,17 +122,17 @@ class FooCollectionSpec extends Specification {
     def "sum of the foobars"() {
         given:
 
-        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
-                new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
-                new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def list = [new Foo(bar: "1", baz: "A"),
+                    new Foo(bar: "2", baz: "B"),
+                    new Foo(bar: "1", baz: "Z"),
+                    new Foo(bar: "1", baz: "B")]
         def pList = treeList(list)
 
         when:
 
-        def sum = pList.fold(0, new Callable2<Integer, ImmutableFoo, Integer>() {
+        def sum = pList.fold(0, new Callable2<Integer, Foo, Integer>() {
             @Override
-            Integer call(Integer a, ImmutableFoo b) throws Exception {
+            Integer call(Integer a, Foo b) throws Exception {
                 return a + Integer.parseInt(b.bar)
             }
         })
@@ -145,18 +145,18 @@ class FooCollectionSpec extends Specification {
     def "lowercase the foobazs"() {
         given:
 
-        def list = [new ImmutableFoo.Builder().withBar("1").withBaz("A").build(),
-                    new ImmutableFoo.Builder().withBar("2").withBaz("B").build(),
-                    new ImmutableFoo.Builder().withBar("1").withBaz("Z").build(),
-                    new ImmutableFoo.Builder().withBar("1").withBaz("B").build()]
+        def list = [new Foo(bar: "1", baz: "A"),
+                    new Foo(bar: "2", baz: "B"),
+                    new Foo(bar: "1", baz: "Z"),
+                    new Foo(bar: "1", baz: "B")]
         def pList = treeList(list)
 
         when:
 
-        def lowerList = pList.map(new Callable1<ImmutableFoo, ImmutableFoo>() {
+        def lowerList = pList.map(new Callable1<Foo, Foo>() {
             @Override
-            ImmutableFoo call(ImmutableFoo o) throws Exception {
-                return new ImmutableFoo.Builder().withBar(o.bar).withBaz(o.baz.toLowerCase()).build()
+            Foo call(Foo o) throws Exception {
+                return new Foo(bar: o.bar, baz: o.baz.toLowerCase())
             }
         })
 

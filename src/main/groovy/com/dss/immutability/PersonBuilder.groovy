@@ -24,7 +24,9 @@ class PersonBuilder extends BuilderSupport {
     }
 
     private buildPhoneNumber(phoneNumberExpando) {
-        new PhoneNumber(phoneNumberExpando.areaCode, phoneNumberExpando.prefix, phoneNumberExpando.lineNumber)
+        new PhoneNumber(phoneNumberExpando.areaCode,
+                        phoneNumberExpando.prefix,
+                        phoneNumberExpando.lineNumber)
     }
 
     def createNode(Object name, Map attributes) {

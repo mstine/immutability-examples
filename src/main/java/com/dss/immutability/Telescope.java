@@ -20,16 +20,16 @@ public final class Telescope {
         this.f = f;
     }
 
-    public Telescope(String a, String b, String c) {
-        this(a, b, c, null, null, null);
+    public Telescope(String a, String b, String c, String d, String e) {
+        this(a, b, c, d, e, null);
     }
 
     public Telescope(String a, String b, String c, String d) {
         this(a, b, c, d, null, null);
     }
 
-    public Telescope(String a, String b, String c, String d, String e) {
-        this(a, b, c, d, e, null);
+    public Telescope(String a, String b, String c) {
+        this(a, b, c, null, null, null);
     }
 
     public String getA() {

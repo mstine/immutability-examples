@@ -46,8 +46,10 @@ public class ImmutableFoo {
 		}
 		
 		private void validate() {
-		  Preconditions.checkArgument(!StringUtils.isBlank(bar), "bar may not be blank");
-		  Preconditions.checkArgument(!StringUtils.isBlank(baz), "baz may not be blank");
+		  Preconditions.checkArgument(!StringUtils.isBlank(bar),
+                  "bar may not be blank");
+		  Preconditions.checkArgument(!StringUtils.isBlank(baz),
+                  "baz may not be blank");
 		}		
 	}
 
